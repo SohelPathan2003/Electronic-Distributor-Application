@@ -25,5 +25,16 @@ public List<VendorModel> getAllVendorList() {
 public void deleteVendorById(int vendorid) {
    adminRepo.deleteVendorById(vendorid);
 }
+
+@Override
+public boolean isUpdateVendor(VendorModel vendormodel) {
+	// TODO Auto-generated method stub
+	return adminRepo.isUpdateVendor(vendormodel);
 }
 
+@Override
+public List<VendorModel> searchVendorByName(String str) {
+	
+	return adminRepo.searchVendorByName(str);
+}
+}

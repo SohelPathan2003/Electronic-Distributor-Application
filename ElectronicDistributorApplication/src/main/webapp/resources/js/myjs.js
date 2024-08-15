@@ -25,37 +25,54 @@ function isValidvendor(str) {
 }
 
 
-function searchvendor(str) {
-	let xttp = new XMLHttpRequest();
 
-	xttp.onreadystatechange = function() {
+
+
+function searchvendor(s) {
+	
+	let xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		 
 		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("vendortable").innerHTML = this.responseText;
-
+			let str="";
+			let jasonobject=JSON.parse(this.responseText);
+			str+="<table class='table'>";
+			str+="<thead class='thead-dark'>";
+			str+="<tr>";
+			str+="<th scope='col'>VendorID</th>";
+			str+="<th scope='col'>Vendor Name</th>";
+			str+="<th scope='col'>Vendor Email</th>";
+			str+="<th scope='col'>Delete</th>";
+			str+="<th scope='col'>Update</th>";
+			str+="</tr>";
+			str+="</thead>";
+			str+="<tbody>";
+			for(let i=0;i<jasonobject.length;i++){
+				str+="<tr>";
+				str+="<td>"+(i+1)+"</td>";
+				str+="<td>"+jasonobject[i].vendorName+"</td>";
+				str+="<td>"+jasonobject[i].email+"</td>";
+				str+="<td><a class='text-dark' href=deletevendor?vid="+jasonobject[i].vendorId+">Delete</a></td>";
+				str+="<td><a class='text-dark' href=updatevendor?vid="+jasonobject[i].vendorId+"&name="+jasonobject[i].vendorName+" &email="+jasonobject[i].email+">Update</a></td>";
+				str+="</tr>";
+			}
+			
+			str+="</tbody>";
+			str+="</table>";
+			
+			str+="</table>";
+			document.getElementById("searchedtable").innerHTML=str;
 		}
 	};
 
-	xttp.open("GET", "SearchVendorAjax.jsp?value=" + str, true);
-	xttp.send();
+	xhttp.open("GET", "searchvendor?v=" + s, true);
+	xhttp.send();
 
 }
 
 
 
 
-function searchvendorbyid(str) {
-	let xttp = new XMLHttpRequest();
-	xttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("searchvendortable").innerHTML = this.responseText;
-
-		}
-	};
-
-	xttp.open("GET", "SearchVendorByIdAjax.jsp?vendorname=" + str, true);
-	xttp.send();
-
-}
 
 
 function checkname(name) {

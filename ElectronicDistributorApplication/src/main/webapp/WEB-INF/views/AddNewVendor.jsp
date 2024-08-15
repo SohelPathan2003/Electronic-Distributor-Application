@@ -50,10 +50,10 @@ if(btn!=null){
 <form action="isAddVendor" method="get">
 
 <div class="veder-cont">
-<input type="text" value="" name="vendorName" placeholder="Enter Vendor Name" onkeyup="isValidvendor(this.value)">
-<input type="email" value="" name="email" placeholder="Enter Your Mail" onkeyup="isValidvendor(this.value)">
-<input type="Number" value="" name="contact" placeholder="Enter Your Contact" onkeyup="isValidvendor(this.value)">
-<input type="text" value="" name="address" placeholder="Enter Vendor City" onkeyup="isValidvendor(this.value)">
+<input type="text" value="" name="vendorName" placeholder="Enter Vendor Name">
+<input type="email" value="" name="email" placeholder="Enter Your Mail">
+<input type="Number" value="" name="contact" placeholder="Enter Your Contact">
+<input type="text" value="" name="address" placeholder="Enter Vendor City">
 <small id="small"></small>
 <input type="submit" value="Submit" name="btn" id="vendorbtn" > 
 </div>

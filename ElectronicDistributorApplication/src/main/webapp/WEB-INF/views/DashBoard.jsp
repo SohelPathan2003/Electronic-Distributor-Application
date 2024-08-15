@@ -21,9 +21,12 @@
 
 
 		<div class="sidebar">
+		<%
+		String username=(String)session.getAttribute("user");
+		%>
            
 			<div class="admindiv poppins-semibold-italic  ">
-				<h1 id="adminname">Welcome ${loginname } ${log }</h1>
+				<h1 id="adminname">Welcome <%=username %></h1>
 			</div>
 
 			<div class="menu-content">

@@ -6,14 +6,14 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-
+<script type="text/javascript" src="../resources/js/myjs.js"></script>
 </head>
 <body>
 <%@include file="CompanyMaster.jsp" %>
-	<input type="text" value="" placeholder="Search Vendor" class=" input form-control form-control-lg" name="searchvendor"
-		onkeyup="searchvendor(this.value)">
+	<input type="text" placeholder="Search Vendor" class=" input form-control form-control-lg" name="searchv" onkeyup="searchvendor(this.value)">
 
 	
+	<div id="searchedtable">
 		<table class="table">
 			<thead class="thead-dark">
 			
@@ -41,6 +41,7 @@
 				
 			</tbody>
 		</table>
+		</div>
 
 
 	

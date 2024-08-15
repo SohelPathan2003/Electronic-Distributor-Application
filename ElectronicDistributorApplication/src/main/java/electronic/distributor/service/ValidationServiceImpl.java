@@ -1,7 +1,10 @@
+
+
 package electronic.distributor.service;
 
 import electronic.distributor.model.LoginModel;
 import electronic.distributor.model.RegisterModel;
+import electronic.distributor.model.VendorModel;
 import electronic.distributor.repository.ValidationRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +25,12 @@ public List<LoginModel> isValidUser(LoginModel loginmodel) {
 public boolean isRegisterUser(RegisterModel registermodel) {
    return logrepo.isRegisterUser(registermodel);
 }
+
+
 }
+
+
+
+
+
+

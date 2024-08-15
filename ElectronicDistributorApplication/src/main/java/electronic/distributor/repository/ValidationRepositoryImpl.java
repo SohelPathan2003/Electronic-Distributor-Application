@@ -3,6 +3,7 @@ package electronic.distributor.repository;
 
 import electronic.distributor.model.LoginModel;
 import electronic.distributor.model.RegisterModel;
+import electronic.distributor.model.VendorModel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Repository;
 public class ValidationRepositoryImpl implements ValidationRepository {
 @Autowired
 JdbcTemplate template;
-
+int value =0;
 public ValidationRepositoryImpl() {
 }
 
@@ -46,7 +47,16 @@ public List<LoginModel> isValidUser(LoginModel loginmodel) {
 }
 
 public boolean isRegisterUser(RegisterModel registermodel) {
-   int value = template.update("CALL storeclient(?, ?, ?, ?, ?)",registermodel.getUserName(), registermodel.getEmail(), registermodel.getContact(), registermodel.getAddress(), registermodel.getPassword());
+   value= template.update("CALL storeclient(?, ?, ?, ?, ?)",registermodel.getUserName(), registermodel.getEmail(), registermodel.getContact(), registermodel.getAddress(), registermodel.getPassword());
    return value > 0?true:false;
 }
+
+
 }
+
+
+
+
+
+
+

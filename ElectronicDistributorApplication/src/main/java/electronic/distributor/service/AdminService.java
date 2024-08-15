@@ -4,9 +4,12 @@ import electronic.distributor.model.VendorModel;
 import java.util.List;
 
 public interface AdminService {
-boolean isAddVendor(VendorModel vendormodel);
+	boolean isAddVendor(VendorModel vendormodel);
 
-List<VendorModel> getAllVendorList();
+	List<VendorModel> getAllVendorList();
 
-void deleteVendorById(int id);
+	void deleteVendorById(int id);
+
+	public boolean isUpdateVendor(VendorModel vendormodel);
+	public List<VendorModel> searchVendorByName(String str);
 }

@@ -18,23 +18,31 @@ if(btn!=null){
 %>
 
  <script type="text/javascript">
-    	   if("${msg}"=="success"){ 
+    	   if("${result}"=="success"){ 
     		   Swal.fire({
     			   title:'Success!',
-    			   text:'Vendor Added Successfully!!',
+    			   text:'Vendor Updated Successfully!!',
     			   icon:'Success',
     			   confirmButtonText:'Ok'
+    			   }).then((result)=>{
+    				   if(result.isConfirmed){ 
+    					   window.location.href='ViewVendor';
+    				   }
     			   });
     		   
     	   }
     	   else{
     		      Swal.fire({
     		    	  title:'Error!!',
-    		    	  text:'Failed To Add Vendor',
+    		    	  text:'Failed To Update Vendor',
     		    	  icon:'error',
     		    	  confirmButtonText:'Ok'
     		    	  
-    		      });
+    		      }).then((result)=>{
+   				   if(result.isConfirmed){ 
+					   window.location.href='ViewVendor';
+				   }
+			   });
     	   }
     	   
     	
@@ -51,8 +59,9 @@ if(btn!=null){
 
 
 <div class="veder-cont">
-<input type="text" name="vendorName" class="form-control form-control-lg" value="${name}"onkeyup="isValidvendor(this.value)">
-<input type="email"  name="email" class="form-control form-control-lg" value="${email}" onkeyup="isValidvendor(this.value)">
+<input type="hidden" name="vendorId" value="${vid }"> 
+<input type="text" name="vendorName" class="form-control form-control-lg" value="${name}">
+<input type="email"  name="email" class="form-control form-control-lg" value="${email}" >
 <small id="small"></small>
 <input type="submit" value="UPDATE" name="btn" id="vendorbtn" > 
 </div>

@@ -40,7 +40,8 @@ public class MainController {
 
 		List<LoginModel> list = loginvalid.isValidUser(loginmodel);
 		LoginModel logm = list.get(0);
-		request.getSession().setAttribute("loginname", logm.getUsername());
+		String name[]=logm.getUsername().split(" ");
+		request.getSession().setAttribute("user", name[0]);
 		if (logm.getLoginType().equals("admin")) {
 			return "DashBoard";
 		} else {
