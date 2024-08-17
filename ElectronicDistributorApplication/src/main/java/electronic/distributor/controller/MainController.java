@@ -36,9 +36,14 @@ public class MainController {
 	ValidationServiceImpl loginvalid;
 
 	@RequestMapping("/validlogin")
-	public String isvaliduser(LoginModel loginmodel, HttpServletRequest request, Map map) {
-
+	public String isvaliduser(LoginModel loginmodel, HttpServletRequest request, Map<String,String> map) {
+		if(loginmodel.getEmail()==null || loginmodel.getPassword()==null) {
+			map.put("result", "wrong");
+			return "Login";
+		}
+		
 		List<LoginModel> list = loginvalid.isValidUser(loginmodel);
+		if(list.size()>0) {
 		LoginModel logm = list.get(0);
 		String name[]=logm.getUsername().split(" ");
 		request.getSession().setAttribute("user", name[0]);
@@ -47,6 +52,11 @@ public class MainController {
 		} else {
 			return "SubAdmin";
 		}
+		}else {
+			map.put("result", "wrong");
+			return "Login";
+		}
+
 	}
 	
 	@RequestMapping("/submitRegistration")
@@ -60,5 +70,11 @@ public class MainController {
 			return "Register";
 		}
 		
+	}
+	
+	@RequestMapping("/Add-Subadmin")
+	
+	public String subAdminPage() {
+		return "Add-Subadmin";
 	}
 }

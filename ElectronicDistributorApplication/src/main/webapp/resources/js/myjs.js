@@ -1,3 +1,4 @@
+
 function isValidvendor(str) {
 	let small = document.getElementById("small");
 	let vendorbtn = document.getElementById("vendorbtn");
@@ -49,11 +50,11 @@ function searchvendor(s) {
 			str+="<tbody>";
 			for(let i=0;i<jasonobject.length;i++){
 				str+="<tr>";
-				str+="<td>"+(i+1)+"</td>";
-				str+="<td>"+jasonobject[i].vendorName+"</td>";
-				str+="<td>"+jasonobject[i].email+"</td>";
-				str+="<td><a class='text-dark' href=deletevendor?vid="+jasonobject[i].vendorId+">Delete</a></td>";
-				str+="<td><a class='text-dark' href=updatevendor?vid="+jasonobject[i].vendorId+"&name="+jasonobject[i].vendorName+" &email="+jasonobject[i].email+">Update</a></td>";
+				str+="<td class='text-white'>"+(i+1)+"</td>";
+				str+="<td class='text-white'>"+jasonobject[i].vendorName+"</td>";
+				str+="<td class='text-white'>"+jasonobject[i].email+"</td>";
+				str+="<td><a class='text-white' href=deletevendor?vid="+jasonobject[i].vendorId+">Delete</a></td>";
+				str+="<td><a class='text-white' href=updatevendor?vid="+jasonobject[i].vendorId+"&name="+jasonobject[i].vendorName+" &email="+jasonobject[i].email+">Update</a></td>";
 				str+="</tr>";
 			}
 			
@@ -149,3 +150,6 @@ function checkpass(pass) {
 	}
 
 }
+
+
+

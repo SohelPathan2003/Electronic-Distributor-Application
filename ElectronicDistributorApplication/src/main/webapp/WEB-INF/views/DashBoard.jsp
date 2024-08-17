@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Electronic Distributor</title>
- <link rel="stylesheet" href="./resources/css/dashboard.css" />
+
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
@@ -33,11 +33,11 @@
 				<ul class="menu-items">
 
 					<li class="item poppins-semibold-italic"><a
-						href="admin/CompanyMaster">Vendor Master</a></li>
-					<li class="item poppins-semibold-italic"><a href="#">Product
+						href="CompanyMaster">Vendor Master</a></li>
+					<li class="item poppins-semibold-italic"><a href="productmaster">Product
 							Master</a></li>
 
-					<li class="item poppins-semibold-italic"><a href="#">Sub-Admin
+					<li class="item poppins-semibold-italic"><a href="Add-Subadmin">Sub-Admin
 							Master</a></li>
 
 				</ul>

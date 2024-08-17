@@ -47,22 +47,31 @@
 	<div id="carouselExampleSlidesOnly" class="carousel slide mt-2"
 		data-ride="carousel">
 		<div class="carousel-inner  ">
-			<div class="carousel-item active slider ">
-				<img id="myimg" class="d-block w-100" src="./resources/images/slider3_img.jpg"
+		
+		<div class="carousel-item active slider ">
+				<img id="myimg" class="d-block w-100" src="./resources/images/slider-chroma.webp"
+					alt="First slide">
+			</div>
+			
+			<div class="carousel-item slider">
+				<img id="myimg" class="d-block w-100" src="./resources/images/washing machine slideer.webp"
+					alt="Third slide">
+			</div>
+		
+			<div class="carousel-item slider ">
+				<img id="myimg" class="d-block w-100" src="./resources/images/watch2.avif"
 					alt="First slide">
 			</div>
 			<div class="carousel-item slider ">
 				<img id="myimg" class="d-block w-100" src="./resources/images/slider8.png"
 					alt="Second slide">
 			</div>
+			
 			<div class="carousel-item slider">
 				<img id="myimg" class="d-block w-100 " src="./resources/images/slider7.jpg"
 					alt="Third slide">
 			</div>
-			<div class="carousel-item slider">
-				<img id="myimg" class="d-block w-100" src="./resources/images/slider6.jpg"
-					alt="Third slide">
-			</div>
+			
 		</div>
 	</div>
 
@@ -89,7 +98,7 @@
 					More</a>
 			</div>
 			<div class="shop-link">
-				<h3>Home Refresh Ideas</h3>
+				<h3>Washing Machine</h3>
 				<img src="./resources/images/Washing Machines.jpeg" alt="card"> <a
 					href="#">See More</a>
 			</div>
@@ -108,13 +117,13 @@
 
 
 			<div class="shop-link">
-				<h3>Air Conditioner</h3>
-				<img src="./resources/images/AC.jpeg" alt="card"> <a href="#">See
+				<h3>Ironing</h3>
+				<img src="./resources/images/ironing.jpg" alt="card"> <a href="#">See
 					More</a>
 			</div>
 			
 			<div class="shop-link">
-				<h3>Air Conditioner</h3>
+				<h3>HeadPhone</h3>
 				<img src="./resources/images/headphones.webp" alt="card"> <a href="#">See
 					More</a>
 			</div>

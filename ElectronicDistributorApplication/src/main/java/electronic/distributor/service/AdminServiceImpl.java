@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service("adminservice")
 public class AdminServiceImpl implements AdminService {
+
 @Autowired
 AdminRepository adminRepo;
 

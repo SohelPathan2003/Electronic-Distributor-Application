@@ -4,23 +4,6 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 
-<style>
-
-input{
-width:700px;
-height:40px;
-margin-left:100px;
-margin-top:20px;
-}
-
-.imgheight img{
-
-  height:100%;
-}
-</style>
-
-<link rel="stylesheet" href="CSS/LoginForm.css">
-
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script
@@ -29,56 +12,198 @@ margin-top:20px;
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css"
 	rel="stylesheet">
+	  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	  <style type="text/css">
+	  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap");
+	  
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 0 10px;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('./resources/images/bg-image7.avif');
+  background-position: center;
+  background-size: cover;
+}
+
+.wrapper {
+  width: 400px;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(8px);
+  
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  
+ 
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.input-field {
+  position: relative;
+  border-bottom: 2px solid #ccc;
+  margin: 15px 0;
+}
+
+.input-field label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.15s ease;
+}
+
+.input-field input {
+  width: 100%;
+  height: 40px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #fff;
+}
+
+.input-field input:focus~label,
+.input-field input:valid~label {
+  font-size: 0.8rem;
+  top: 10px;
+  transform: translateY(-120%);
+}
+
+.forget {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 25px 0 35px 0;
+  color: #fff;
+}
+
+#remember {
+  accent-color: #fff;
+}
+
+.forget label {
+  display: flex;
+  align-items: center;
+}
+
+.forget label p {
+  margin-left: 10px;
+  margin-top:13px;
+}
+
+.wrapper a {
+  color: #efefef;
+  text-decoration: none;
+}
+
+.wrapper a:hover {
+  text-decoration: underline;
+}
+
+button {
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 16px;
+  border: 2px solid transparent;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  color: #fff;
+  border-color: #fff;
+   background: rgba(255, 255, 255, 0.15);
+}
+
+.register {
+  text-align: center;
+  margin-top: 30px;
+  color: #fff;
+}
+	  
+	  </style>
+      
 </head>
 <body>
-<section class="vh-100" style="background-image: linear-gradient(30deg,#ffffff,#a1ffce);">
-  <div class="container py-0 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-xl-10">
-        <div class="card" style="border-radius: 1rem;">
-          <div class="row g-0">
-            <div class="col-md-6 col-lg-5 d-none d-md-block imgheight">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
-                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
-            </div>
-            <div class="col-md-6 col-lg-7 d-flex align-items-center">
-              <div class="card-body p-4 p-lg-5 text-black">
-
-                <form action="validlogin" method="get">
-
-                  <div class="d-flex align-items-center mb-3 pb-1" style="height:0px ">
-                    <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                    <span class="h1 fw-bold mb-0" ></span>
-                  </div>
-
-                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
-
-                  <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="text" id="form2Example17" name="email" class="form-control form-control-lg" style="width:450px; margin-left:0px;border:2.2px solid #9A616D;" />
-                    <label class="form-label" for="form2Example17">Email address</label>
-                  </div>
-
-                  <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="password" id="form2Example27" name="password" class="form-control form-control-lg" style="width:450px;margin-left:0px"/>
-                    <label class="form-label" for="form2Example27">Password</label>
-                  </div>
-
-                  <div class="pt-1 mb-4">
-                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block"  name="s" type="submit">Login</button>
-                  </div>
-
-                  <a class="small text-muted " href="#!">Forgot password?</a>
-                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="#!"
-                      style="color: #393f81;">Register here</a></p>
-                </form>
-
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="wrapper">
+    <form action="validlogin">
+      <h2>Login</h2>
+        <div class="input-field">
+        <input type="email" name="email" required>
+        <label>Enter your email</label>
       </div>
-    </div>
-  </div>
-</section>
+      <div class="input-field">
+        <input type="text" name="password" required>
+        <label>Enter your password</label>
+      </div>
+      <div class="forget">
+        <label for="remember">
+          <input type="checkbox" id="remember">
+           <p>Remember me</p>
+        </label>
+       
+        <a href="#">Forgot password?</a>
+      </div>
+      <input type="submit"  value="Log In">
+   
+      <div class="register">
+        <p>Don't have an account? <a href="register">Register</a></p>
+      </div>
+    </form>
+  
+
+  
+  <%
+  String btn=request.getParameter("s");
+  if(btn!=null){
+  %>
+  <script type="text/javascript">
+        
+        var result = "${result}";
+       
+        if (result == "wrong") {
+        	Swal.fire({
+ 			   title:'Error!',
+ 			   text:'Failed To Login!!',
+ 			   icon:'error',
+ 			   confirmButtonText:'Ok'
+ 			   });
+      
+       
+        }
+       
+        </script>
+        <%
+  }
+       %>
+</div>
 </body>
 </html>

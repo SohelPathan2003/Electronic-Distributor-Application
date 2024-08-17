@@ -16,27 +16,33 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping({"/admin/"})
+//@RequestMapping("/admin")
 public class AdminController {
 boolean b;
+
 @Autowired
 AdminService adminservice;
+
 List<VendorModel> listofvendor = null;
 
 public AdminController() {
 }
 
-@RequestMapping({"CompanyMaster"})
+@RequestMapping("/dashboard")
+public String showDashBoard() {
+	return "DashBoard";
+}
+@RequestMapping("/CompanyMaster")
 public String addCompanyPage() {
    return "CompanyMaster";
 }
 
-@RequestMapping({"addVendorPage"})
+@RequestMapping("addVendorPage")
 public String addVendorPage() {
    return "AddNewVendor";
 }
 
-@RequestMapping({"isAddVendor"})
+@RequestMapping("isAddVendor")
 public String IsAddVendor(VendorModel vendormodel, Map map) {
    this.b = this.adminservice.isAddVendor(vendormodel);
    System.out.println(this.b);
@@ -61,14 +67,15 @@ public String showAllVendor(Map<String, List> map) {
    return "ViewVendor";
 }
 
-@RequestMapping({"deletevendor"})
-public String deleteVendor(@RequestParam("vid") int vid, Map<String, List> map) {
-   adminservice.deleteVendorById(vid);
+@RequestMapping("deletevendor")
+public String deleteVendor(@RequestParam("vid") String vid, Map<String, List> map) {
+	int v=(int)Integer.parseInt(vid);
+   adminservice.deleteVendorById(v);
    map.put("list", this.getAllVednor());
    return "ViewVendor";
 }
 
-@RequestMapping({"updatevendor"})
+@RequestMapping("updatevendor")
 public String UpdatePage(@RequestParam("vid") int vid, @RequestParam("name") String vendorname, @RequestParam("email") String email, Map map) {
    map.put("vid", vid);
    map.put("name", vendorname);
@@ -98,4 +105,9 @@ public String UpdatePage(@RequestParam("vid") int vid, @RequestParam("name") Str
     	
     	 return listvendor;
     }
+     
+     @RequestMapping("/productmaster")
+     public String showProductMaster() {
+    	 return "ProductMaster";
+     }
 }
