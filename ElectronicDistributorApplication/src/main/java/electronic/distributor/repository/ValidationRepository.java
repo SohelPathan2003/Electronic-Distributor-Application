@@ -11,4 +11,5 @@ public interface ValidationRepository {
 List<LoginModel> isValidUser(LoginModel loginmodel);
 
 boolean isRegisterUser(RegisterModel registermodel);
+public List<RegisterModel> getUserProfile(String email,String password);
 }

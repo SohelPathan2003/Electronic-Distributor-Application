@@ -14,6 +14,13 @@ public VendorModel(String vendorName, Long contact, String address, String email
    this.email = email;
 }
 
+
+public VendorModel( int vendorId,String vendorName) {
+
+	this.vendorName = vendorName;
+	this.vendorId = vendorId;
+}
+
 public VendorModel() {
 }
 

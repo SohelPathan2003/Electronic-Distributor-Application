@@ -26,6 +26,12 @@ public boolean isRegisterUser(RegisterModel registermodel) {
    return logrepo.isRegisterUser(registermodel);
 }
 
+@Override
+public List<RegisterModel> getUserProfile(String email, String password) {
+	
+	return logrepo.getUserProfile(email, password);
+}
+
 
 }
 

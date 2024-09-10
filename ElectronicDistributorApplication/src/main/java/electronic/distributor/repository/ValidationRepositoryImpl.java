@@ -20,11 +20,12 @@ public class ValidationRepositoryImpl implements ValidationRepository {
 @Autowired
 JdbcTemplate template;
 int value =0;
+List<RegisterModel> userProfie;
 public ValidationRepositoryImpl() {
 }
 
 public List<LoginModel> isValidUser(LoginModel loginmodel) {
-   List<LoginModel> list =template.query("select logintype,username from loginvalidation where email=? and password =?", new PreparedStatementSetter() {
+   List<LoginModel> list =template.query("select loginid,logintype,username,imageURL from loginvalidation where email=? and password =?", new PreparedStatementSetter() {
 
 	@Override
 	public void setValues(PreparedStatement ps) throws SQLException {
@@ -37,8 +38,10 @@ public List<LoginModel> isValidUser(LoginModel loginmodel) {
 
 	@Override
 	public LoginModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+		  loginmodel.setLoginId(rs.getInt("loginid"));
 		  loginmodel.setLoginType(rs.getString("logintype"));
 		  loginmodel.setUsername(rs.getString("username"));
+		  loginmodel.setImageURL(rs.getString("imageURL"));
 		return loginmodel;
 	}
 	   
@@ -47,8 +50,39 @@ public List<LoginModel> isValidUser(LoginModel loginmodel) {
 }
 
 public boolean isRegisterUser(RegisterModel registermodel) {
-   value= template.update("CALL storeclient(?, ?, ?, ?, ?)",registermodel.getUserName(), registermodel.getEmail(), registermodel.getContact(), registermodel.getAddress(), registermodel.getPassword());
-   return value > 0?true:false;
+   value= template.update("CALL storelogin(?, ?, ?, ?, ?,?)",registermodel.getUserName(), registermodel.getEmail(), registermodel.getContact(), registermodel.getAddress(), registermodel.getPassword(),registermodel.getImageURL());
+     return value > 0?true:false;
+}
+
+@Override
+public List<RegisterModel> getUserProfile(String email, String password) {
+	
+	userProfie=template.query("select * from clientmaster where email=? and password=?",new PreparedStatementSetter() {
+
+		@Override
+		public void setValues(PreparedStatement ps) throws SQLException {
+			ps.setString(1, email);
+			ps.setString(2, password);
+			
+		}
+		
+	}, new RowMapper<RegisterModel>() {
+
+		@Override
+		public RegisterModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+			RegisterModel registermodel=new RegisterModel();
+			registermodel.setClientId(rs.getInt(1));
+			registermodel.setUserName(rs.getString(2));
+			registermodel.setEmail(rs.getString(3));
+			registermodel.setContact(rs.getLong(4));
+			registermodel.setAddress(rs.getString(5));
+			registermodel.setPassword(rs.getString(6));
+			return registermodel;
+		}
+		
+	});
+	
+	return userProfie; 
 }
 
 

@@ -7,6 +7,16 @@ private String email;
 private String password;
 private String confirmPassword;
 private String address;
+private int clientId;
+
+
+public int getClientId() {
+	return clientId;
+}
+
+public void setClientId(int clientId) {
+	this.clientId = clientId;
+}
 
 public RegisterModel() {
 }
@@ -57,5 +67,15 @@ public String getAddress() {
 
 public void setAddress(String address) {
    this.address = address;
+}
+
+private String imageURL;
+
+public String getImageURL() {
+	return imageURL;
+}
+
+public void setImageURL(String imageURL) {
+	this.imageURL = imageURL;
 }
 }

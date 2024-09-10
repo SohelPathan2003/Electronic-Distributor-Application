@@ -7,12 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="DashBoard.jsp" %>
-<h1>Welcome in Sub Admin Page.......</h1>
 
-</div></div>
-</div>
+<h1>
 
-
+see product details
+</h1>
 </body>
 </html>

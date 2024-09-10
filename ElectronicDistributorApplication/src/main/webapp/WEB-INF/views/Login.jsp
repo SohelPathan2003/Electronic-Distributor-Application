@@ -8,6 +8,8 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+	
+	
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css"
@@ -15,7 +17,7 @@
 	  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	  <style type="text/css">
 	  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap");
-	  
+     
 body {
   display: flex;
   align-items: center;
@@ -49,6 +51,7 @@ body::before {
 form {
   display: flex;
   flex-direction: column;
+  margin-top:-50px;
   
  
 }
@@ -147,22 +150,45 @@ button:hover {
   text-align: center;
   margin-top: 30px;
   color: #fff;
+  margin-bottom:20px;
+}
+
+#back{
+position:relative;
+width:40px;
+height:40px;
+top:460px;
+left:140px;
+
+}
+#back img{
+color:white;
+width:100%;
+height:100%;
+background-color:white;
+border-radius: 50%;
+
 }
 	  
 	  </style>
       
-</head>
+     
 <body>
   <div class="wrapper">
     <form action="validlogin">
+    <div id="back">
+    <a  href="home"><img src="./resources/images/backleft.png"></a>
+    </div>
       <h2>Login</h2>
         <div class="input-field">
         <input type="email" name="email" required>
         <label>Enter your email</label>
+         <span></span>
       </div>
       <div class="input-field">
-        <input type="text" name="password" required>
+        <input type="text" name="password" required onkeyup="checkpass(this.value)">
         <label>Enter your password</label>
+        <span  id="passmass"></span>
       </div>
       <div class="forget">
         <label for="remember">
@@ -172,7 +198,7 @@ button:hover {
        
         <a href="#">Forgot password?</a>
       </div>
-      <input type="submit"  value="Log In">
+      <input type="submit" name="s" value="Log In">
    
       <div class="register">
         <p>Don't have an account? <a href="register">Register</a></p>

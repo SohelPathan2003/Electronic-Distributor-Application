@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="DashBoard.jsp" %>
-<h1>Welcome in Product Master Page.......</h1>
 
-</div></div>
-</div>
 </body>
 </html>

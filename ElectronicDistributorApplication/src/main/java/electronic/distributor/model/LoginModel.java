@@ -4,6 +4,25 @@ private String username;
 private String password;
 private String loginType;
 private String email;
+private String imageURL;
+private int loginId;
+
+
+public int getLoginId() {
+	return loginId;
+}
+
+public void setLoginId(int loginId) {
+	this.loginId = loginId;
+}
+
+public String getImageURL() {
+	return imageURL;
+}
+
+public void setImageURL(String imageURL) {
+	this.imageURL = imageURL;
+}
 
 public LoginModel() {
 }
