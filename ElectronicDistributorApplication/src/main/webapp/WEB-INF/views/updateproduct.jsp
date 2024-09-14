@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" errorPage="error.jsp"%>
 	<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ page import="java.util.*"%>
 <%@ page import="electronic.distributor.model.*, org.springframework.beans.factory.annotation.Autowired"%>
@@ -79,7 +78,7 @@
         if (result === "success") {
         	Swal.fire({
  			   title:'Success!',
- 			   text:'Registration Successfully!!',
+ 			   text:'Product Update Successfully!!',
  			   icon:'success',
  			   confirmButtonText:'Ok'
  			   }).then((result)=>{
@@ -90,7 +89,7 @@
         } else if (result === "wrong") {
         	Swal.fire({
 		    	  title:'Error!!',
-		    	  text:'Failed To Register',
+		    	  text:'Failed To Update Product',
 		    	  icon:'error',
 		    	  confirmButtonText:'Ok'
 		    	  

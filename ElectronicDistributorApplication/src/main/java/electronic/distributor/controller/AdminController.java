@@ -209,7 +209,10 @@ public String UpdatePage(@RequestParam("vendorid") int vendorid, @RequestParam("
      @RequestMapping("/updateproduct")
      public String isUpdateProduct(@RequestParam("vid")int vid,@RequestParam("pid")int pid,@RequestParam("pcid") int pcid,@RequestParam("productnumber")int prodnumber,@RequestParam("vendorname")String vname,@RequestParam("productname")String pname,@RequestParam("productcategoryname")String pcname,
     		 @RequestParam("date")String date,@RequestParam("details")String details,Map map) {
+    	 System.out.println(vid+" "+pid+" "+pcid+" "+prodnumber+" "+vname+" "+pname+" "+pcname+" "+date+" "+details);
     	 map.put("forupdate", new ProductAllDetailsModel(prodnumber,new VendorModel(vid,vname),new ProductModel(pid,pname),new ProductCategoryModel(pcid,pcname),date,details));
+    	
+    	//  after update i fetched all the list of vendor and products and its category
     	 map.put("listofvendor", adminservice.getAllVendorList());
     	 map.put("productcategory",productservice.getAllProductCategoryList());
     	 map.put("products",productservice.getAllProductList());
@@ -217,11 +220,12 @@ public String UpdatePage(@RequestParam("vendorid") int vendorid, @RequestParam("
      }
      
      @RequestMapping("/updateaddproductwithdetails")
-     public String updateaddproductwithdetails(HttpServletRequest request,ProductModel pmodel,ProductCategoryModel productCategorymodel,VendorModel vmodel,Map map ) {
+     public String updateaddproductwithdetails(HttpServletRequest request,ProductModel pmodel,ProductCategoryModel productCategorymodel,Map map ) {
     	 ProductAllDetailsModel productwithdetails=new ProductAllDetailsModel();
     	
     	 productwithdetails.setProductNumber(Integer.parseInt(request.getParameter("productnumber")));
-    	 productwithdetails.setVendorModel(vmodel);
+    	 int vendorId=Integer.parseInt(request.getParameter("vendorId"));
+    	 productwithdetails.setVendorModel(new VendorModel(vendorId,request.getParameter("vendorName")));
     	 productwithdetails.setProductModel(pmodel);
     	 productwithdetails.setProductCategoryModel(productCategorymodel);
     	 productwithdetails.setDate(request.getParameter("date"));

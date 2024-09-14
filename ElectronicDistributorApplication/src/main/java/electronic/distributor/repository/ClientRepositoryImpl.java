@@ -111,7 +111,7 @@ public class ClientRepositoryImpl implements ClientRepository {
 	public boolean isProductOrder(ProductOrderModel productordermodel) {
 		result =template.update("insert into ordermaster values('0',?,?,?,?,?,curdate())",new PreparedStatementSetter() {
 
-			@Override
+			
 			public void setValues(PreparedStatement ps) throws SQLException {
 				ps.setInt(1,productordermodel.getUserLoginId());
 				ps.setInt(2, productordermodel.getProductNumber());
@@ -120,6 +120,16 @@ public class ClientRepositoryImpl implements ClientRepository {
 				ps.setString(5,productordermodel.getAddress());
 			
 			
+			}
+			
+		});
+		result=template.update("update product_stock set quantity=quantity-? where productnumber=? ",new PreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setInt(1,productordermodel.getQuantity());
+				ps.setInt(2, productordermodel.getProductNumber());
+				
 			}
 			
 		});

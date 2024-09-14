@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" errorPage="error.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+ 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
    
     <style>
@@ -242,6 +243,45 @@
     	
     	alert("Should be login first");
     }
+    
+    function ConfirmLogout(loginid){
+    	
+    	if(loginid!=0){
+    	 Swal.fire({
+    	        title: 'Are you sure?',
+    	        text: 'You will not be able to Buy!',
+    	        icon: 'warning',
+    	        showCancelButton: true,
+    	        confirmButtonColor: '#DD6B55',
+    	        cancelButtonColor: '#3085d6',
+    	        confirmButtonText: 'Yes, Logout!',
+    	        cancelButtonText: 'No, cancel!'
+    	    }).then((result) => {
+    	        if (result.isConfirmed) {
+    	            Swal.fire(
+    	                'Logout!',
+    	                'Logout Successfully.',
+    	                'success'
+    	            ).then((result) => {
+    	                if (result.isConfirmed) {
+    	                    window.location.href = "userlogout";
+    	                }
+    	            });
+    	        } else {
+    	            Swal.fire('Cancelled', 'Failed to Logout :)', 'error');
+    	        }
+    	    });
+    	}else{
+    		
+    		 Swal.fire({
+    		        title: 'Not Logged In',
+    		        text: 'You need to be logged in to perform this action.',
+    		        icon: 'warning',
+    		        confirmButtonText: 'Okay'
+    		      });
+    	}
+
+    }
     </script>
 </head>
 <body>
@@ -258,7 +298,14 @@
                     <a href="#">Help</a> 
                     <a href="login">Login</a>
                     <a href="register">Sign In</a>
-                    <a href="userlogout">Logout</a>
+                    
+                    <%
+                    int userid=0;
+                    if(session.getAttribute("imageURL")!=null){ 
+                    	userid=(int)session.getAttribute("userloginid");
+                    }
+                    %>
+                    <a href="#" onclick="ConfirmLogout(<%=userid%>)">Logout</a>
                    
                 </div>
                 
@@ -266,7 +313,7 @@
                   <%
                   String imageURL=null;
                  
-                  int userid=0;
+                  
                   if(session.getAttribute("imageURL")!=null){
                 	  imageURL=(String)session.getAttribute("imageURL"); 
                 	  userid=(int)session.getAttribute("userloginid");
@@ -330,7 +377,7 @@
             <div class="shop-link">
                 <h3>Washing Machine</h3>
                 <img id="myimg" src="./resources/images/Washing Machines.jpeg" alt="Washing Machine">
-                <a href="viewproductforclient?productname=Washing-Machines">See More</a>
+                <a href="viewproductforclient?productname=Washing-Machine">See More</a>
             </div>
             <div class="shop-link">
                 <h3>Mobiles</h3>
@@ -340,7 +387,7 @@
             <div class="shop-link">
                 <h3>Air Conditioner</h3>
                 <img id="myimg" src="./resources/images/AC.jpeg" alt="Air Conditioner">
-                <a href="viewproductforclient?productname=Air Conditioner">See More</a>
+                <a href="viewproductforclient?productname=Air-Conditioner">See More</a>
             </div>
             <div class="shop-link">
                 <h3>Laptops</h3>
@@ -350,7 +397,7 @@
             <div class="shop-link">
                 <h3>Headphones</h3>
                 <img id="myimg" src="./resources/images/headphones.webp" alt="Headphones">
-                <a href="viewproductforclient?productname=headphone">See More</a>
+                <a href="viewproductforclient?productname=HearPhones">See More</a>
             </div>
         </div>
     </section>

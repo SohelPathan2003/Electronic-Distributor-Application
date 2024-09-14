@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" errorPage="error.jsp"%>
 <%@ include file="DashBoard.jsp" %>
 <%@ page import="electronic.distributor.model.*" %>
 <%@ page import="electronic.distributor.service.*" %>

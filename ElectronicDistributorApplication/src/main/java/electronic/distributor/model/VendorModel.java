@@ -2,7 +2,6 @@ package electronic.distributor.model;
 
 public class VendorModel {
 private String vendorName;
-private int vendorId;
 private Long contact;
 private String address;
 private String email;
@@ -15,10 +14,10 @@ public VendorModel(String vendorName, Long contact, String address, String email
 }
 
 
-public VendorModel( int vendorId,String vendorName) {
-
-	this.vendorName = vendorName;
+public VendorModel(int vendorId,String vendorName) {
 	this.vendorId = vendorId;
+	this.vendorName = vendorName;
+	
 }
 
 public VendorModel() {
@@ -31,14 +30,17 @@ public String getVendorName() {
 public void setVendorName(String vendorName) {
    this.vendorName = vendorName;
 }
+private int vendorId;
 
 public int getVendorId() {
-   return this.vendorId;
+	return vendorId;
 }
 
-public void setVendorId(int vendorid) {
-   this.vendorId = vendorid;
+
+public void setVendorId(int vendorId) {
+	this.vendorId = vendorId;
 }
+
 
 public Long getContact() {
    return this.contact;

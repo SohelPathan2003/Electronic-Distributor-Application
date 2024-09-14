@@ -82,6 +82,13 @@ border:2px solid white;
     }
 }
 
+
+ .position-sticky .profile-photo {
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            margin-left: 100px;
+        }
 </style>
 
 </head>
@@ -89,15 +96,24 @@ border:2px solid white;
 
 
 <div class="container-fluid">
+
     <div class="row">
         <nav id="sidebar" class="col-md-3 col-lg-3 d-md-block bg-dark sidebar mx-0 mt-0 mp-0 my-0">
+        
             <div class="position-sticky">
+             <%
+String imageURL;
+imageURL=(String)session.getAttribute("imageURL");
+int adminid=(int)session.getAttribute("userloginid");
+%>
+ <a href="adminprofile?adminid=<%=adminid %>"><img src="./resources/images/<%=imageURL %>" class="profile-photo" alt="User Photo"></a>
             <%
 		String username=(String)session.getAttribute("user");
 			%>
-                <div class="adminname poppins-semibold-italic">
-                    <h1>Welcome <%= username %></h1>
+                <div class="">
+                    <h1><%= username %></h1>
                 </div>
+                
 
                 <ul class="nav flex-column">
                     <li class="nav-item dropdown myborder myhover">

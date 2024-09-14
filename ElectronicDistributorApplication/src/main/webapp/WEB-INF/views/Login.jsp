@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" errorPage="error.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-	
+	  <script src='./resources/js/distribution.js'></script>
 	
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -17,6 +18,7 @@
 	  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	  <style type="text/css">
 	  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap");
+	  
      
 body {
   display: flex;
@@ -181,15 +183,17 @@ border-radius: 50%;
     </div>
       <h2>Login</h2>
         <div class="input-field">
-        <input type="email" name="email" required>
+        <input type="email" onkeyup="checkEmail(this.value)" name="email" required>
         <label>Enter your email</label>
-         <span></span>
+        
       </div>
+       <span id="mail_message" class="text-white"></span>
       <div class="input-field">
-        <input type="text" name="password" required onkeyup="checkpass(this.value)">
+        <input type="text" name="password" required onkeyup="checkStrongPassword(this.value)">
         <label>Enter your password</label>
-        <span  id="passmass"></span>
+    
       </div>
+          <span  id="password_message" class="text-white"></span>
       <div class="forget">
         <label for="remember">
           <input type="checkbox" id="remember">

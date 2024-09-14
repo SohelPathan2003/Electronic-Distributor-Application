@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -50,7 +51,12 @@ public List<LoginModel> isValidUser(LoginModel loginmodel) {
 }
 
 public boolean isRegisterUser(RegisterModel registermodel) {
+	try {
    value= template.update("CALL storelogin(?, ?, ?, ?, ?,?)",registermodel.getUserName(), registermodel.getEmail(), registermodel.getContact(), registermodel.getAddress(), registermodel.getPassword(),registermodel.getImageURL());
+	}catch(DataAccessException e) {
+		System.out.println(e);
+		return false;
+	}
      return value > 0?true:false;
 }
 

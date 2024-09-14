@@ -1,4 +1,4 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" errorPage="error.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -177,13 +177,23 @@
            
             margin-right:20px;
         }
+        #remainingstock{
+        color:red;
+        font-size:large;
+        }
+        #stockexceed{
+          color:red;
+        font-size:large;
+        margin-left:30%;
+        }
     </style>
 </head>
-<body onload="discount()">
+<body onload="discount('${product.stockDetailsModel.quantity}')">
 
 <div class="product-page">
     <div class="product-container">
         <div class="image-section">
+        <input type="hidden" value="${product.stockDetailsModel.quantity}" id="stock">
             <img src="${pageContext.request.contextPath}/resources/images/${product.imageURL}" alt="BenQ Monitor" class="product-image">
             <div class="button-container">
             
@@ -208,6 +218,7 @@
                 <span class="assured">Assured</span>
             </div>
             
+            <span id="remainingstock"></span>
            
             
             <div class="price-section">
@@ -251,7 +262,9 @@
                         <label for="quantity">Quantity:</label>
                         <div class="input-group">
                         <%
-                        int userloginid=(int)session.getAttribute("userloginid");
+                        int userloginid=0;
+                        if(session.getAttribute("userloginid")!=null)
+                        userloginid=(int)session.getAttribute("userloginid");
                         %>
                         <input type="hidden" name="userLoginId" value="<%=userloginid%>">
                          <input type="hidden" name="productNumber" value="${product.productNumber}">
@@ -261,8 +274,10 @@
                             <input type="number" name="quantity" id="quantity" class="form-control" value="1" min="1" onchange="updateAmount()">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" onclick="changeQuantity(1)">+</button>
+                                
                             </div>
                         </div>
+                         <span id="stockexceed"></span>
                     </div>
                     <div class="form-group">
                         <label for="amount">Amount:</label>
@@ -284,11 +299,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
+<%-- 
 
-
-    function discount(){
-    	
-    	
+    function discount(quantity){
+    	var remainingstock=document.getElementById("remainingstock");
+    	if(quantity<=3){
+    		
+    		remainingstock.innerHTML=" Only "+quantity+" Stocks Are Remaining";
+    	}
     	var sellingprice=parseInt(document.getElementById("sellingprice").value);
     	var actualprice=parseInt(sellingprice+300);
     	document.getElementById("discountinpercentage").innerHTML=""+((actualprice-sellingprice)/actualprice)*100;
@@ -302,7 +320,10 @@
     
     // redirect user if he is not login 
     <%
-	String name=(String)session.getAttribute("user");
+    String name=null;
+    if(session.getAttribute("user")!=null){
+	name=(String)session.getAttribute("user");
+    }
 	%>
    
    
@@ -361,14 +382,113 @@
         quantityInput.value = currentQuantity;
         updateAmount();
     }
+   
+    	 --%>
+    	 
+    	     function discount(quantity) {
+    	         var remainingstock = document.getElementById("remainingstock");
+    	         if (quantity <= 3) {
+    	             remainingstock.innerHTML = "Only " + quantity + " Stocks Are Remaining";
+    	         } else {
+    	             remainingstock.innerHTML = ""; // Clear message if stock is more than 3
+    	         }
+    	         var sellingprice = parseInt(document.getElementById("sellingprice").value);
+    	         var actualprice = parseInt(sellingprice + 300);
+    	         document.getElementById("discountinpercentage").innerHTML = "" + ((actualprice - sellingprice) / actualprice) * 100;
+    	         document.getElementById("discountforemi").innerHTML = "" + (sellingprice) / 5;
+    	     }
+    	     
+    	  // redirect user if he is not login 
+    	     <%
+    	     String name=null;
+    	     if(session.getAttribute("user")!=null){
+    	 	name=(String)session.getAttribute("user");
+    	     }
+    	 	%>
+
+    	     function validuser() {
+    	         var UserLogin = "<%=name%>";
+    	         if (UserLogin != "null") {
+    	             showPurchaseForm();
+    	         } else {
+    	             window.location.href = "loginFirst?productnumber=${product.productNumber}";
+    	         }
+    	     }
+
+    	     function showPurchaseForm() {
+    	         $('#purchaseModal').modal('show');
+    	     }
+
+    	     function updateAmount() {
+    	         const quantity = parseInt(document.getElementById('quantity').value, 10);
+    	         const stock = parseInt(document.getElementById('stock').value, 10); // Add hidden stock value input
+    	         const price = parseFloat(document.querySelector('.price').innerText.replace(/[^0-9.-]/g, '')); // Ensure price is fetched correctly
+
+    	         if (quantity <= 0) {
+    	             Swal.fire({
+    	                 title: 'Out of Stock',
+    	                 text: 'Product is out of stock.',
+    	                 icon: 'warning',
+    	                 confirmButtonText: 'OK'
+    	             });
+    	             document.getElementById('quantity').value = 1; // Reset quantity to 1
+    	             return;
+    	         }
+
+    	         if (quantity > stock) {
+    	             Swal.fire({
+    	                 title: 'Insufficient Stock',
+    	                 text: 'You cannot order more than ' + stock + ' units of this product.',
+    	                 icon: 'warning',
+    	                 confirmButtonText: 'OK'
+    	             });
+    	             document.getElementById('quantity').value = stock; // Reset quantity to available stock
+    	             return;
+    	         }
+
+    	         const total = Math.floor(quantity * price); // Convert to integer
+    	         document.getElementById('amount').value = total; // No need to use toFixed(2) for integer
+    	     }
+
+    	     if ("${result}" != "null") {
+    	         if ("${result}" == "success") {
+    	             Swal.fire({
+    	                 title: 'Success!',
+    	                 text: 'Product purchased successfully!',
+    	                 icon: 'success',
+    	                 confirmButtonText: 'OK'
+    	             }).then(() => {
+    	                 $('#purchaseModal').modal('hide');
+    	                 document.getElementById('purchaseForm').reset();
+    	             });
+    	         } else {
+    	             Swal.fire({
+    	                 title: 'Error!',
+    	                 text: 'There was a problem with your purchase. Please try again.',
+    	                 icon: 'error',
+    	                 confirmButtonText: 'OK'
+    	             });
+    	         }
+    	     }
+
+    	     function changeQuantity(change) {
+    	         const quantityInput = document.getElementById('quantity');
+    	         const stock = parseInt(document.getElementById('stock').value, 10); // Add hidden stock value input
+    	         let currentQuantity = parseInt(quantityInput.value, 10);
+    	         currentQuantity = Math.max(1, currentQuantity + change);
+    	         if (currentQuantity > stock) {
+    	             currentQuantity = stock; // Ensure quantity does not exceed stock
+    	             document.getElementById("stockexceed").innerHTML="Not Available";
+    	         }else{
+    	        	 document.getElementById("stockexceed").innerHTML="";
+    	         }
+    	         quantityInput.value = currentQuantity;
+    	         
+    	         updateAmount();
+    	     }
     
-    
-    
-    
-    
-    	
-    	
 </script>
+
 
 </body>
 </html>

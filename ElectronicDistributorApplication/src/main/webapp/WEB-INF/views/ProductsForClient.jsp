@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" errorPage="error.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -200,6 +200,28 @@ input[type="text"]::placeholder {
             height: 24px;
             margin-right: 10px;
         }
+        #pagination {
+    margin-top: 20px;
+}
+
+#pagination button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+#pagination button.active {
+    background-color: #0056b3;
+}
+
+#pagination button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+        
     </style>
     
     
@@ -276,6 +298,8 @@ input[type="text"]::placeholder {
             </div>
            </c:forEach>
         </div>
+        <div id="pagination" class="text-center mt-4"></div>
+        
         <div class="text-center">
                        <a href="home" class="btn btn-secondary mt-5 back-btn">
                     <i class="fas fa-arrow-left"></i>  Back
@@ -347,5 +371,68 @@ input[type="text"]::placeholder {
                 </div>
         </div>
     </footer>
+    
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const productsPerPage = 6; // Number of products per page
+        const productList = document.querySelectorAll('.row > .col-md-4'); // All product items
+        const totalProducts = productList.length;
+        const totalPages = Math.ceil(totalProducts / productsPerPage);
+        let currentPage = 1;
+
+        function showPage(page) {
+            productList.forEach((item, index) => {
+                const start = (page - 1) * productsPerPage;
+                const end = start + productsPerPage;
+                item.style.display = index >= start && index < end ? 'block' : 'none';
+            });
+            updatePaginationControls();
+        }
+
+        function updatePaginationControls() {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            const prevButton = document.createElement('button');
+            prevButton.textContent = 'Previous';
+            prevButton.disabled = currentPage === 1;
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    showPage(currentPage);
+                }
+            });
+            pagination.appendChild(prevButton);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.textContent = i;
+                pageButton.className = i === currentPage ? 'active' : '';
+                pageButton.addEventListener('click', () => {
+                    currentPage = i;
+                    showPage(currentPage);
+                });
+                pagination.appendChild(pageButton);
+            }
+
+            const nextButton = document.createElement('button');
+            nextButton.textContent = 'Next';
+            nextButton.disabled = currentPage === totalPages;
+            nextButton.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    showPage(currentPage);
+                }
+            });
+            pagination.appendChild(nextButton);
+        }
+
+        // Initialize the pagination
+        showPage(currentPage);
+    });
+    </script>
+
+   
 </body>
 </html>

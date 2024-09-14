@@ -1,35 +1,50 @@
 
 function isValidvendor(vendorname) {
-	let small = document.getElementById("small");
-	let vendorbtn = document.getElementById("vendorbtn");
-	var regexp = /^[a-zA-Z]+$/;
-	let result = regexp.test(vendorname);
-	if (vendorname.length == 0) {
+    let small = document.getElementById("small");
+    let vendorbtn = document.getElementById("vendorbtn");
 
-		small.innerHTML = " ";
-		vendorbtn.disabled = false;
-	} else {
-		if (result == false) {
-			small.innerHTML = "invalid username";
-			vendorbtn.style.backgroundColor = 'blue';
-			vendorbtn.disabled = true;
+    // Regular expression to validate the vendor name (only letters)
+    var regexp = /^[a-zA-Z]+$/;
 
-		}
-		else {
-			small.innerHTML = " ";
-			vendorbtn.disabled = false;
+    // Check for leading or trailing white spaces
+    const hasLeadingSpace = vendorname.startsWith(' ');
+    const hasTrailingSpace = vendorname.endsWith(' ');
 
-
-
-		}
-	}
+    if (vendorname.length === 0) {
+        // If vendor name is empty, clear the error and enable the button
+        small.innerHTML = " ";
+        vendorbtn.disabled = false;
+    } else if (hasLeadingSpace || hasTrailingSpace) {
+        // If there are leading or trailing spaces
+        small.innerHTML = "Vendor name should not start or end with white spaces.";
+        vendorbtn.style.backgroundColor = 'blue';
+        vendorbtn.disabled = true;
+    } else if (!regexp.test(vendorname)) {
+        // If the vendor name contains invalid characters
+        small.innerHTML = "Invalid vendor name. Only letters are allowed.";
+        vendorbtn.style.backgroundColor = 'blue';
+        vendorbtn.disabled = true;
+    } else {
+        // If the vendor name is valid
+        small.innerHTML = " ";
+        vendorbtn.disabled = false;
+        vendorbtn.style.backgroundColor = ''; // Reset button color to default
+    }
 }
+
+// Attach the isValidvendor function to the input event of the vendor name field
+document.getElementById('vendorName').addEventListener('input', function() {
+    isValidvendor(this.value);
+});
+
 
 
 
 
 
 function searchvendor(vendorname) {
+	
+    
 	
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -68,7 +83,6 @@ function searchvendor(vendorname) {
 
 	xhttp.open("GET", "searchvendor?vendorname=" + vendorname, true);
 	xhttp.send();
-
 }
 
 
@@ -97,55 +111,63 @@ function checkUserName(userName) {
 }
 
 function checkValidNumber(number) {
-	var button = document.getElementById("btn");
-	var regexp = /^\d{10}$/;
-	let result = regexp.test(number);
-	
-     
-	
-	
-	 const regex = /^(0000000000|1111111111|2222222222|3333333333|4444444444|5555555555|6666666666|7777777777|8888888888|9999999999)$/;
+    var button = document.getElementById("btn");
+    var contactMessage = document.getElementById("contact_message");
 
-    if(regex.test(number)==true){
-		document.getElementById("contact_message").innerHTML = "Invalid Contact Number";
-		button.disabled = true;
-		
-	}
-	
-	
-	if (number != "") {
-		if (result) {
-			document.getElementById("contact_message").innerHTML = "";
-			button.disabled = false;
-		} else {
-			document.getElementById("contact_message").innerHTML = "Invalid Contact Number";
-			button.disabled = true;
-		}
-	} else {
-		document.getElementById("contact_message").innerHTML = "";
-		button.disabled = false;
-	}
-	
+    // Regular expression to check if the number is exactly 10 digits and starts with 9, 8, or 7
+    var validNumberRegex = /^[987]\d{9}$/;
+
+    // Regular expression to check for invalid patterns (sequences of identical digits)
+    const invalidPatternsRegex = /^(0000000000|1111111111|2222222222|3333333333|4444444444|5555555555|6666666666|7777777777|8888888888|9999999999)$/;
+
+    // Trim any white spaces from the number
+    number = number.trim();
+
+    // Check if the number is empty
+    if (number === "") {
+        contactMessage.innerHTML = "";
+        button.disabled = true; // Disable button if input is empty
+        return;
+    }
+
+    // Check if the number contains white spaces
+    if (/\s/.test(number)) {
+        contactMessage.innerHTML = "Contact number should not contain white spaces";
+        button.disabled = true; // Disable button if input contains white spaces
+        return;
+    }
+
+    // Check if the number is valid, starts with 9, 8, or 7, and is not in the invalid patterns
+    if (validNumberRegex.test(number) && !invalidPatternsRegex.test(number)) {
+        contactMessage.innerHTML = "";
+        button.disabled = false; // Enable button if valid
+    } else {
+        contactMessage.innerHTML = "Invalid Contact Number";
+        button.disabled = true; // Disable button if invalid
+    }
 }
+
 
 function checkEmail(email) {
-	var button = document.getElementById("btn");
-	var regexp = /^[^.0-9][a-z.]+@[a-z]+.[\w{3}a-z]*$/;
-	let result = regexp.test(email);
-	if (email != "") {
-		if (result) {
-			document.getElementById("mail_message").innerHTML = "";
-			button.disabled = false;
-		} else {
-			document.getElementById("mail_message").innerHTML = "Invalid Email";
-			button.disabled = true;
-		}
-	} else {
-		document.getElementById("mail_message").innerHTML = "";
-		button.disabled = false;
-	}
+    var button = document.getElementById("btn");
+    // Improved regex for email validation
+    var regexp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let result = regexp.test(email);
 
+    if (email !== "") {
+        if (result) {
+            document.getElementById("mail_message").innerHTML = "";
+            button.disabled = false;
+        } else {
+            document.getElementById("mail_message").innerHTML = "Invalid Email";
+            button.disabled = true;
+        }
+    } else {
+        document.getElementById("mail_message").innerHTML = "";
+        button.disabled = true;  // Typically disable the button if the input is empty
+    }
 }
+
 
 function checkStrongPassword(password) {
 	var button = document.getElementById("btn");
@@ -261,6 +283,8 @@ function searchproduct(searchkey,bysearch){
 	
 	
 }
+
+
 
 
 

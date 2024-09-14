@@ -149,5 +149,11 @@ public class MainController {
 	   
 	    return "Login"; 
 	}
+	
+	@RequestMapping("/adminprofile")
+	public String showAdminProfile(@RequestParam("adminid")int adminid) {
+		
+		return "profilePage";
+	}
 
 }

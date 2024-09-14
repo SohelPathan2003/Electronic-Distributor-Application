@@ -1,5 +1,4 @@
-  <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" errorPage="error.jsp"%>
 <%@ page import="java.util.*"%>
 <%@ page import="electronic.distributor.model.*, org.springframework.beans.factory.annotation.Autowired"%>
 <%@ page import="electronic.distributor.service.*"%>
